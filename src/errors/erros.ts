@@ -7,9 +7,9 @@ function notFound(resource: string = "Item"): CustomError {
     }
 }
 
-function conflict(resource: string) : CustomError {
+function conflictError(resource: string) : CustomError {
     return {
-        type: "conflict", 
+        type: "conflictError", 
         message: `${resource ? resource : "Item"} já existe!`
     }
 }
@@ -49,4 +49,4 @@ function  BadRequest(): CustomError {
     }
 }
 
-export const errors = {notFound, conflict, InternalServerError, conflictForBeingEqual, UnprocessableEntityforDate, BadRequest, UnprocessableEntity};
+export const errors = {notFound, conflictError, InternalServerError, conflictForBeingEqual, UnprocessableEntityforDate, BadRequest, UnprocessableEntity};

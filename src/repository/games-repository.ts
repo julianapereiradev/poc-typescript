@@ -17,9 +17,14 @@ async function postGame(game: CreateGame) {
   return resultPostGames.rows[0];
 }
 
+async function findRepeatedGame(game: CreateGame) {
+  return await db.query<Game>(`SELECT * FROM games WHERE title=$1 AND platform=$2`, [game.title, game.platform]);
+}
+
 const gamesRepository = {
   getGames,
-  postGame
+  postGame,
+  findRepeatedGame
 };
 
 export default gamesRepository;

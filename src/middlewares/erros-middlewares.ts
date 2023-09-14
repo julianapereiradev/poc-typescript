@@ -4,7 +4,8 @@ import { CustomError } from "@/protocols/error-protocol";
 
 
 export default function errorHandler(error: CustomError, req: Request, res: Response, next: NextFunction) {
-    if (error.type === "conflict") {
+    
+    if (error.type === "conflictError") {
         return res.status(httpStatus.CONFLICT).send(error.message);
     }
 
