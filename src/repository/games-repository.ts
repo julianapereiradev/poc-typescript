@@ -1,8 +1,8 @@
-import { connection } from "../database/database";
-import { Game} from "../protocols/game-protocol";
+import { db } from "@/database/database";
+import { Game } from "@/protocols/game-protocol";
 
 async function getGames() {
-  const resultGetGames = await connection.query<Game[]>(`SELECT * FROM games`);
+  const resultGetGames = await db.query<Game[]>(`SELECT * FROM games`);
   return resultGetGames.rows;
 }
 
