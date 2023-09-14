@@ -23,28 +23,24 @@ export async function postGamesController(req: Request, res: Response) {
 export async function updateGameController(req: Request, res: Response) {
   const gameId = parseInt(req.params.id);
   const updatedGame = req.body as Game;
-  
-  try {
-    const game = await gamesService.updateGame(gameId, updatedGame);
-    if (game === null) {
-      return res.sendStatus(httpStatus.NOT_FOUND);
+ 
+    const gameUpdate = await gamesService.updateGame(gameId, updatedGame);
+    
+    if (gameUpdate === null) {
+      return res.sendStatus(httpStatus.BAD_REQUEST);
     }
-    res.send(game);
-  } catch (error) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-  }
+
+    res.send(gameUpdate);
+ 
 }
 
 export async function deleteGameController(req: Request, res: Response) {
   const gameId = parseInt(req.params.id);
   
-  try {
     const success = await gamesService.deleteGame(gameId);
     if (!success) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
     res.sendStatus(httpStatus.NO_CONTENT);
-  } catch (error) {
-    return res.sendStatus(httpStatus.INTERNAL_SERVER_ERROR);
-  }
+
 }
