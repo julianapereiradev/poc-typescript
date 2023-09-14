@@ -5,9 +5,14 @@ async function getGames() {
   return await gamesRepository.getGames();
 }
 
+async function postGames(game: Game) {
+  return await gamesRepository.postGame(game);
+}
+
 
 const gamesService = {
   getGames,
+  postGames
 };
 
 
