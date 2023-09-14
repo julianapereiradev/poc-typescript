@@ -15,9 +15,34 @@ async function postGames(game: Game) {
 }
 
 
+async function updateGame(gameId: number, updatedGame: Game): Promise<Game | null> {
+  const existingGame = await gamesRepository.getGameById(gameId);
+  if (!existingGame) {
+    return null; // Jogo não encontrado
+  }
+
+  // Atualize os campos do jogo existente com os valores de updatedGame
+  existingGame.title = updatedGame.title;
+  existingGame.platform = updatedGame.platform;
+
+  return await gamesRepository.updateGame(existingGame);
+}
+
+async function deleteGame(gameId: number): Promise<boolean> {
+  const existingGame = await gamesRepository.getGameById(gameId);
+  if (!existingGame) {
+    return false; // Jogo não encontrado
+  }
+
+  return await gamesRepository.deleteGame(gameId);
+}
+
+
 const gamesService = {
   getGames,
-  postGames
+  postGames,
+  updateGame,
+  deleteGame
 };
 
 
